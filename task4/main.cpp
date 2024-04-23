@@ -1,8 +1,6 @@
 #include <iostream>
-#include <unordered_map>
-#include <string>
 #include <memory>
-#include <random>
+#include <unordered_map>
 
 class CustomKey
 {
@@ -17,6 +15,7 @@ public:
         return part1 == other.part1 && part2 == other.part2;
     }
 };
+
 class CustomKeyHash
 {
 public:
@@ -29,9 +28,18 @@ public:
 class SharedPtrCustomKeyHash
 {
 public:
+    SharedPtrCustomKeyHash() = default;
+
+    SharedPtrCustomKeyHash(const SharedPtrCustomKeyHash &other) = default;
+
+    SharedPtrCustomKeyHash(SharedPtrCustomKeyHash &&other) noexcept = default;
+
+    SharedPtrCustomKeyHash &operator=(const SharedPtrCustomKeyHash &other) = default;
+
+    SharedPtrCustomKeyHash &operator=(SharedPtrCustomKeyHash &&other) noexcept = default;
+
     int operator()(const std::shared_ptr<CustomKey> &key) const
     {
-
         return CustomKeyHash{}(*key);
     }
 };
@@ -39,25 +47,10 @@ public:
 int main()
 {
 
-    std::unordered_map<CustomKey, int, CustomKeyHash> customMap;
-
-    std::random_device rd;
-    std::mt19937 gen(rd());
-    std::uniform_int_distribution<> dis(1, 100);
-
-    for (int i = 0; i < 5; ++i)
-    {
-        std::string part1 = "Part1_" + std::to_string(i);
-        std::string part2 = "Part2_" + std::to_string(i);
-        customMap[CustomKey(part1, part2)] = dis(gen);
-    }
-
-    for (const auto &pair : customMap)
-    {
-        std::cout << "Key: {" << pair.first.part1 << ", " << pair.first.part2 << "}, Value: " << pair.second << std::endl;
-    }
-
     std::unordered_map<std::shared_ptr<CustomKey>, int, SharedPtrCustomKeyHash> sharedPtrMap;
+
+    sharedPtrMap[std::make_shared<CustomKey>("Part1_0", "Part2_0")] = 10;
+    sharedPtrMap[std::make_shared<CustomKey>("Part1_1", "Part2_1")] = 20;
 
     for (const auto &pair : sharedPtrMap)
     {
