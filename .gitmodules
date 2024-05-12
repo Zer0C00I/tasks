@@ -1,6 +1,0 @@
-[submodule "test/external/boost"]
-	path = test/external/boost
-	url = https://github.com/boostorg/boost.git
-[submodule "external/boost"]
-	path = external/boost
-	url = https://github.com/boostorg/boost.git
