@@ -11,7 +11,7 @@
 #include <QJsonDocument>
 #include <qudpsocket.h>
 #include <QThread>
-#include <qhostaddress_metatype.h>
+#include "src/headers/qhostaddress_metatype.h"
 #include <QDebug>
 
 

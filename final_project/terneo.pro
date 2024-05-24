@@ -9,16 +9,16 @@ CONFIG += c++17
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-    main.cpp \
-    mainwindow.cpp
+    src/main.cpp \
+    src/mainwindow.cpp
 
 HEADERS += \
-    mainwindow.h \
-    qhostaddress_metatype.h \
-    thermostat_logic.h
+    src/headers/mainwindow.h \
+    src/headers/qhostaddress_metatype.h \
+    src/headers/thermostat_logic.h
 
 FORMS += \
-    mainwindow.ui
+    src/gui/mainwindow.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
